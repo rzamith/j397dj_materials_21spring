@@ -1,0 +1,70 @@
+---
+title: "Course Exercise #1"
+author: "Rodrigo Zamith"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Introduction
+
+The purpose of this assignment is to demonstrate your ability to extract data from a PDF file, organize those data, produce a CSV file that we can examine in R, and produce an R Notebook. You may work with *up to three classmates* on this assignment---if you do so, please note your classmates in the `author` part of your R Notebook header (e.g., `author: "Rodrigo Zamith (with Ice Cube, Vanilla Ice, and Ice T)"`).
+
+The assignment will also require you to use software for extracting data from PDFs (e.g., [Tabula](https://tabula.technology)) as well as a spreadsheet tool (e.g., [Google Sheets](https://www.google.com/sheets/about/)). If you have any trouble installing or using those software, please get in touch with a classmate or post your question on our Piazza forum.
+
+You will be submitting three files on Moodle:
+
+* Your R Notebook (both `.Rmd` and `.html` files) answering the questions at the bottom of this page.
+
+* The CSV file (`.csv`) containing the extracted data. (Just one!)
+
+-----
+
+### The Data
+
+You will be working with data about **undergraduate** student charges at UMass from the 1947-1948 academic year to the present. UMass' Office of University Analytics and Institutional Research [makes these data publicly available](https://www.umass.edu/oir/students/student-charges-aid), but they sadly only provide them via PDF documents.
+
+Your data will come from two different PDF files, which you should save to your computer:
+
+- [UMass Student Charges: 1947-48 to 1981-82](https://zamith.umasscreate.net/data/umass_undergraduate_student_charges_1947_1981.pdf)
+- [UMass Student Charges: 1983-84 to 2020-21](https://zamith.umasscreate.net/data/umass_undergraduate_student_charges_1983_2020.pdf)
+
+You will need extract the data from both files, clean them, and produce **a single CSV file** that contains information **only about undergraduate students**.
+
+-----
+
+### Your Objective
+
+Please answer the following questions through an R Notebook (please use [this template file](https://zamith.umasscreate.net/data/exercise_1_yourname.Rmd)):
+
+1. How did you extract the data from the PDF files? *(10 points)*
+    - Describe the steps you performed as though you were explaining it to someone who has never used the software.
+        - For example, which options, settings, or selection strategies did you use in Tabula? If you did anything different from the 'defaults', _why_ did you do that?
+
+&nbsp;
+
+2. What steps did you need to perform in order to produce a single, properly formatted CSV file with all of the _relevant data_ (see below) that you could bring into R? *(8 points)*
+    - Again, clearly describe the steps you performed.
+        - For example, did you use a spreadsheet tool? Did you rename any of the columns? Did you have to re-align any of the data?
+    - Relevant data includes: Year, In-State costs (Tuition, Fees, Total), Out-of-State costs (Tuition, Fees, Total), Room and Board costs (Room, Board, Total), and All Charges (In-State, its % Change, Out-of-State, its % Change) for **undergraduate** students.
+    - Keep a copy of this CSV file as you will be submitting it.
+
+&nbsp;
+
+3. Read the data into R. Do you see any immediate issues with the way the data were imported? How did you check, and why do you think that? Did you have to do any additional data cleaning? *(4 points)*
+
+&nbsp;
+
+4. Look at the summary information for the dataset. What is the _highest value_ for the All Charges, In-State % Change variable? *(2 points)*
+
+&nbsp;
+
+5. Write **two** questions that are of interest to you that you think you can answer using just the data in the CSV file you produced. For each of these questions, how might these data 'help' a journalist, and how might a journalist 'help' these data? *(6 points)*
+    - Try to think in terms of variables, and be sure to reference some in your dataset.
+        - For example, a good question for a different dataset might be: "Do schools (`school_name`) with more Hispanic students (`ethnicity`) tend to have higher MCAT Math scores `mcat_math`?"

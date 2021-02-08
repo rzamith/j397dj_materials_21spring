@@ -1,0 +1,69 @@
+---
+title: "My First R Notebook"
+author: "(INSERT YOUR NAME HERE)"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+Hello Prof. Zamith,
+
+I'm so happy to be taking this class because I **love** the idea of data-driven storytelling. I spent _the entire winter break_ anxiously awaiting the moment I'd produce my first R Notebook.
+
+I mean, how cool is this?
+
+I can't wait to show off some of my [R Markdown](https://rmarkdown.rstudio.com/authoring_basics.html) abilities and math skills.
+
+### Headings are cool
+
+I expect we'll have some assignments and activities over the course of the semester that involve answering questions you've posed to us. I think it would be helpful for me to answer them using R Notebooks, and to create a separate top-level heading for each question.
+
+But I'm sure the assignments and activities won't just involve me blindly running code. No, I'm sure they'll ask me to describe my thinking in addition to listing my code. Some questions will surely require multiple steps to be completed before the question can be fully answered.
+
+Alas, I think a combination of different-level headings will be really useful for organizing things!
+
+### Question 1
+
+#### Objective/Rationale
+
+It would be helpful for me to describe my rationale for answering a question before I even write a line of code. That's because conceptually describing what I want to accomplish can help me organize my thoughts and make the information "stick" better. No, really, there's science to back this up! Anyway, I can write that in plain text here.
+
+#### Code
+
+I'll also probably be asked to write some code in R to reshape my data, perform calculations, and even compute some new variables. Let me show you that I'm ready to do that by creating a `code chunk`.
+
+The following code chunk will perform a simple mathematical operation: I'll add two to four and multiply the result by seven.
+
+```{r}
+(4+2)*7
+```
+
+#### Answer
+
+The result of that operation is **42**. Coincidentally, that is [the answer to everything](https://en.wikipedia.org/wiki/42_(number)#The_Hitchhiker's_Guide_to_the_Galaxy).
+
+### Question 2
+
+I imagine some of the questions will be a bit more conceptual in nature. In those cases, I'll just need a single sub-heading with the answer. I'll demonstrate that below by answering the following question: *What is a topic that you'd like to write a data-driven story about? What are some of the questions would you'd try to address with that story?*
+
+#### Answer
+
+(Your answer should go here.)
+
+### Summary
+
+With this notebook, I've shown you that I can:
+
+1. Organize my notebook with section headers and paragraph breaks.
+2. Format text by bolding and italicizing, and using links to point to external resources.
+3. Execute R code, showing both the answer and how I arrived at it.
+4. Describe the basic premise for a story idea that I'm interested in.
+5. Produce an ordered list.
+
+Again, I'm so excited to be taking this course and I promise to give it my best!

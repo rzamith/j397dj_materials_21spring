@@ -1,3 +1,10 @@
+# HTML files
+*.html
+
+# Data files
+#**/data/**
+*.Rproj
+
 # History files
 .Rhistory
 .Rapp.history

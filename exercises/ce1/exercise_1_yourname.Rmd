@@ -1,0 +1,51 @@
+---
+title: "Course Exercise  #1"
+author: "YOUR NAME (with ANY PARTNERS)"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Question 1
+
+Offer a clear **answer** here.
+
+### Question 2
+
+Offer a clear **answer** here.
+
+### Question 3
+
+Briefly explain what you are trying to do (or looking for) here. (Write this before you even write any code.)
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 4
+
+Briefly explain what you are trying to do here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 5
+
+#### First Question of Interest
+
+Offer a clear **answer** here for your first question.
+
+#### Second Question of Interest
+
+Offer a clear **answer** here for your second question.
