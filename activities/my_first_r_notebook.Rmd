@@ -1,0 +1,22 @@
+---
+title: "My First R Notebook"
+output:
+  html_document:
+    toc: no
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Introduction
+
+Today, you will be demonstrating your ability to produce a well-formatted [R Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html) using [Markdown](https://www.markdowntutorial.com/).
+
+Specifically, you will need to create an exact replica (except for the two areas where I ask you to insert your name and ideas about an interesting story topic) of [this R Notebook](r_notebook.html).
+
+When you are done creating your replica, please submit your Notebook using [this Google Form](https://docs.google.com/forms/d/e/1FAIpQLSc_BABF5WNZxNAR0C5QaI-GKMBiEX1jdtAzzVzXRadQ0ujRJw/viewform).
+
+As a reminder, you can also access a Markdown tip sheet by loading RStudio, going to **Help**, and selecting **Markdown Quick Reference**.
