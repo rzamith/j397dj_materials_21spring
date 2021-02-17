@@ -1,0 +1,59 @@
+---
+title: "Activity: Extracting Data From PDFs"
+author: "YOUR NAME"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Question 1
+
+> Read the _cleaned_ CSV file you just created into an object called `umass_data`.
+
+Briefly explain what you are trying to do here. (Write this before you even write any code. For example, in this case, you might say: "I need to load the `tidyverse` package, which contains the `read_csv()` function that I need to import the CSV file I created. I'll be assigning the output of that function to an object called `umass_data`." The purpose of this segment is to get you to create a roadmap in your head _before_ you try to execute it.)
+
+```{r}
+# Provide your code here.
+```
+
+### Question 2
+
+> Check the structure of your `umass_data` object. What is the name of the variable (column) containing information about students who are Hispanic/Latino of any race? What is data type for that variable?
+
+Briefly explain what you are trying to do (or looking for) here.
+
+```{r}
+# Provide your code here.
+```
+
+Provide your response here.
+
+### Question 3
+
+> What is the range of values for the variable containing information about the number of Asian students?
+
+Briefly explain what you are trying to do (or looking for) here.
+
+```{r}
+# Provide your code here.
+```
+
+Provide your response here.
+
+### Question 4
+
+> What is the mean of the variable for Black/African American students? What do you need to keep in mind about the source data when answering this question? (Hint: Look back to the PDF file and see if there are any methodological notes you need to be mindful of here.)
+
+Briefly explain what you are trying to do (or looking for) here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
