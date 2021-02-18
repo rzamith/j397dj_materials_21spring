@@ -1,0 +1,67 @@
+---
+title: "Course Exercise #2"
+author: "Rodrigo Zamith"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Introduction
+
+The purpose of this assignment is to demonstrate your ability to perform a basic data analysis (and produce exploratory visualizations) by using the `tidyverse` functions we have covered. You may work with *up to three classmates* on this assignment---if you do so, please note your classmates in the `author` part of your R Notebook header (e.g., `author: "Rodrigo Zamith (with John Lennon, Paul McCartney, and George Harrison)"`).
+
+You will be submitting an R Notebook (**both** the `.Rmd` and `.html` files) that answers the questions at the bottom of this page.
+
+-----
+
+### The Data
+
+You will be working with [financial data about college athletics](http://cafidatabase.knightcommission.org/) from NCAA Division I institutions. These data were collected by the Knight Foundation and cover the years 2005 to 2018.
+
+The CSV file you will be using for this assignment is a slightly modified extract of its [Custom Reporting Tool](http://cafidatabase.knightcommission.org/reports). A data dictionary for our extract is [available here](https://zamith.umasscreate.net/data/cafi_data_dictionary.xls) and the full methodological details are [available here](http://cafidatabase.knightcommission.org/about-the-data).
+
+-----
+
+### Your Objective
+
+Please answer the following questions through an R Notebook (please use [this template file](https://zamith.umasscreate.net/data/exercise_2_yourname.Rmd)):
+
+1. Check that the import came through correctly. Did you notice any issues with the way the data were imported? Looking through the data frame, are you noticing any issues with the data themselves? Why or why not? (*1 point*)
+
+&nbsp;
+
+2. Which school had the highest compensation for its athletic coaches in 2018? (*1 point*)
+
+&nbsp;
+
+3. How much higher was the the highest school's compensation for its athletic coaches in 2018, relative to UMass'? (Express this both as a dollar figure and percent difference.) (*3 points*)
+
+&nbsp;
+
+4. Was the _total football spending_ in 2018 **across all universities** in the Big Ten Conference higher or lower than that of the Southeastern Conference? (*3 points*)
+
+&nbsp;
+
+5. Which conference, among the [Power Five conferences](https://en.wikipedia.org/wiki/Power_Five_conferences), had the highest _median_ total football expenditure among its schools in 2018? (*4 points*)
+
+&nbsp;
+
+6. Create a series of box plots using `ggplot2` that show the distribution of total football expenditures by schools in the Power Five conferences, with a different box plot for each year between 2013 and 2018. What takeaways do you get from looking at these visualizations? (*6 points*)
+
+&nbsp;
+
+7. What was the year-over-year percent change in total athletic expenses at UMass for each year between 2013 and 2018? (*4 points*)
+    - Put another way, what was the percent change in the values between 2013 and 2012, 2014 and 2013, and so on.
+
+&nbsp;
+
+8. Ask (**and answer**) these data two questions that are of interest to you. (*8 points*)
+    - Be sure to note why you think each question is an interesting one.
+    - Use this question to challenge yourself; don't just try to perform the simplest operation you can think of.
+    - It is okay to use your interpretation of a visualization as the basis for your answer.

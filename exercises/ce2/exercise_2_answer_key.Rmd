@@ -1,0 +1,142 @@
+---
+title: "Course Exercise #2"
+author: "YOUR NAME (with ANY PARTNERS)"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Load the Data
+
+```{r}
+options(scipen=999)
+library(tidyverse)
+cafi <- read_csv("https://zamith.umasscreate.net/data/cafi_data.csv")
+```
+
+### Question 1
+
+A good way to approach this question would be to:
+
+1. Check the first few observations.
+2. Check the structure of the data frame.
+3. Check the summary data for the data frame.
+
+```{r}
+head(cafi)
+str(cafi)
+summary(cafi)
+```
+
+Overall, these data seem to be in pretty good shape. However, one thing that strikes me is that there is a decent amount of `NA` values for some of the variables (e.g., `Total Football Coaching Salaries`).
+
+### Question 2
+
+Here's what I'd need to do:
+
+1. Load my data frame.
+2. Apply a filter to only include year 2018 and only evaluate schools.
+3. Sort the data based on the Coach's Compensation.
+
+```{r}
+cafi %>%
+  filter(Year==2018) %>%
+  arrange(-`Coaches Compensation`) %>%
+  select(Entity, Year, `Coaches Compensation`) %>%
+  head()
+```
+
+**The Ohio State University** had the highest compensation for its athletic coaches.
+
+### Question 3
+
+Briefly explain what you are trying to do here.
+
+```{r}
+cafi %>%
+  filter(Entity %in% c("The Ohio State University", "University of Massachusetts Amherst"), Year==2018) %>%
+  select(Entity, Year, `Coaches Compensation`)
+
+40242782-6515645
+
+(40242782-6515645)/6515645*100
+```
+
+The Ohio State University's compensation for its athletic coaches was **$33,727,137** (or **517.6%**) higher than UMass'.
+
+### Question 4
+
+```{r}
+cafi %>%
+  filter(`FBS Conference` %in% c("Southeastern Conference", "Big Ten Conference") & Year==2018) %>%
+  group_by(`FBS Conference`) %>%
+  summarize(total_football_spending=sum(`Total Football Spending`))
+```
+
+The Southeastern Conference had **higher** total football expenditures than the Big Ten Conference.
+
+### Question 5
+
+```{r}
+cafi %>%
+  filter(Year==2018 & `FBS Conference` %in% c("Atlantic Coast Conference", "Big Ten Conference", "Big 12 Conference", "Pacific-12 Conference", "Southeastern Conference")) %>%
+  group_by(`FBS Conference`) %>%
+  summarize(median_total_football_spending=median(`Total Football Spending`)) %>%
+  arrange(-median_total_football_spending)
+```
+
+The **Southeastern Conference** had the highest median total football spending among its schools in 2018.
+
+### Question 6
+
+```{r}
+cafi %>%
+  filter(between(Year, 2013, 2018) & `FBS Conference` %in% c("Atlantic Coast Conference", "Big Ten Conference", "Big 12 Conference", "Pacific-12 Conference", "Southeastern Conference")) %>%
+  select(Year, `FBS Conference`, `Total Football Spending`) %>%
+  ggplot(aes(x=fct_reorder(`FBS Conference`, desc(`FBS Conference`)), y=`Total Football Spending`)) +
+    geom_boxplot() +
+    coord_flip() +
+    facet_wrap(~Year) +
+    theme(axis.text.x=element_text(angle=45, hjust=1)) +
+    xlab("FBS Conference")
+```
+I can see that the median total football spending by the Southeastern Conference has routinely exceeded that of the other Power Five Conferences, and it made a _significant_ jump in 2018. Additionally, football spending has increased across the board in recent years.
+
+### Question 7
+
+```{r}
+cafi %>%
+  filter(Entity=="University of Massachusetts Amherst") %>%
+  arrange(Year) %>%
+  select(Entity, Year, `Total Expenses`) %>%
+  mutate(pct_change=(`Total Expenses`-lag(`Total Expenses`, 1))/lag(`Total Expenses`, 1)*100) %>%
+  filter(between(Year, 2013, 2018))
+```
+
+The increases between 2013 and 2018 were: **2.8%, 7.2%, 10.1%, 14.5%, 11.1%, and -2.3%**.
+
+### Question 8 (Part 1)
+
+My question: Has UMass' academic spending increased at a proportional rate to its athletic spending over the past five years?
+
+Rationale: I believe this is an interesting question because it sheds light on UMass' spending priorities, especially in light of tightening budgets and increased enrollment costs in higher education.
+
+```{r}
+cafi %>%
+  filter(Entity=="University of Massachusetts Amherst") %>%
+  arrange(Year) %>%
+  select(Entity, Year, `Total Expenses`, `Total Academic Spending (University-Wide)`) %>%
+  mutate(pct_chg_athletic=(`Total Expenses`-lag(`Total Expenses`, 1))/lag(`Total Expenses`, 1)*100, pct_chg_acad=(`Total Academic Spending (University-Wide)`-lag(`Total Academic Spending (University-Wide)`, 1))/lag(`Total Academic Spending (University-Wide)`, 1)*100) %>%
+  mutate(pct_diff=pct_chg_athletic-pct_chg_acad) %>%
+  filter(between(Year, 2014, 2018))
+```
+
+With the exception of the most recent year (2018), UMass has seen larger year-over-year percent increases in its total athletic spending.
+
+### Question 8 (Part 2)

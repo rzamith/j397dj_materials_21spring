@@ -1,0 +1,115 @@
+---
+title: "Course Exercise #2"
+author: "YOUR NAME (with ANY PARTNERS)"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Load the Data
+
+```{r}
+options(scipen=999)
+library(tidyverse)
+cafi <- read_csv("https://zamith.umasscreate.net/data/cafi_data.csv")
+```
+
+### Question 1
+
+Briefly explain what you are trying to do here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 2
+
+Briefly explain what you are trying to do here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 3
+
+Briefly explain what you are trying to do here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 4
+
+Briefly explain what you are trying to do here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 5
+
+Briefly explain what you are trying to do here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 6
+
+Briefly explain what you are trying to do here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 7
+
+Briefly explain what you are trying to do here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 8 (Part 1)
+
+My question: 
+
+My rationale: 
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 8 (Part 2)
+
+My question: 
+
+My rationale: 
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
