@@ -20,6 +20,23 @@ library(tidyverse)
 cafi <- read_csv("https://zamith.umasscreate.net/data/cafi_data.csv")
 ```
 
+### Sample Question and Response
+
+> Below is a sample response to show you the format and level of detail I'd like to see. The question being answered here is: How many different universities are there in this dataset?
+
+In order to answer this question, I need to do the following:
+
+1. Load the data from my object.
+2. Pipe that information into a function that counts the number of unique values in my dataset, giving it the variable for `IPEDS ID` (which is a unique identifier for each school). (I could also potentially do this with the `Entity` variable.)
+3. Count the number of rows in the output (since each row will correspond to a unique school).
+
+```{r}
+cafi %>%
+  distinct(`IPEDS ID`)
+```
+
+There are **231** different schools in my dataset.
+
 ### Question 1
 
 Briefly explain what you are trying to do here.
