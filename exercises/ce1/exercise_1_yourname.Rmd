@@ -1,5 +1,5 @@
 ---
-title: "Course Exercise  #1"
+title: "Course Exercise #1"
 author: "YOUR NAME (with ANY PARTNERS)"
 output:
   html_document:

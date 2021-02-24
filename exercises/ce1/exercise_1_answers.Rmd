@@ -1,0 +1,91 @@
+---
+title: "Course Exercise #1"
+author: "ANSWER KEY"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Question 1
+
+> This was a strong answer submitted by one of your classmates.
+
+First, I combined the two files into one using Preview (I use a Mac). This step allowed me to sort the pages according to the undergraduate and graduate categories.
+
+Opening Tabula, I used the `browse` button to search for the PDF. Upon finding the correct PDF file, I imported it and selected the relevant data by highlighting all the numerical values. Two selections are necessary, one for years 1947-48 to 1981-82, and another for 1983-84 to 2020-21.
+
+I temporarily excluded the column titles. Excluding them helps Tabula make better sense of the data being extracted, and it makes the cleaning step less time consuming.
+
+I then hit the `Preview and Export` button, and then `Export`, leaving all export settings on default.
+
+### Question 2
+
+> This was a strong answer submitted by one of your classmates.
+
+Tabula exported a single CSV file with all the highlighted data included. I opened it in Excel.
+
+The first thing I did was add a row to the top of the spreadsheet, and populated it with the column titles.
+
+Next, I used the `Find and Replace` function to strip out any unwanted special characters, spaces, and commas. However, some issues remained with the thousands separators. Formatting the cells containing data values quickly resolved this. However, eliminating the `%` symbol without altering the numerical value was not as easy. When using the `Find and Replace` function, I noticed while removing the `%` symbol, it would multiply the numerical value by 100. Fortunately, reformatting the cells according to `Format Cells -> Category: -> General` would divide the value by 100.
+
+For example, using the value of in-state percentage change for the year 1947-48:
+
+Step 1: using the `Find and Replace` function to strip out the `%` symbol (5.70% -> 570.00)
+
+Step 2: reformat the cells by `Format Cells -> Category: -> General` (570.00 -> 5.7)
+
+Step 3: Apply to the rest of the columns labeled `In-state % change` and `Out-of-state % change`
+
+Once satisfied with how the data appeared, I renamed the file `undergrad_fees` and exported it as a CSV file.
+
+### Question 3
+
+To answer this question, I first need to load the `tidyverse` package, which includes the `read_csv()` function that we can use to open the CSV file I created.
+
+All the function needs is the path to the CSV file (provided as a string), so I just pointed it to the folder and filename where I saved things. (I saved it in a folder called "data" within my working directory.)
+
+I'll also need to store the output in an object, which I'll call `umass_tuition_data`.
+
+I can also use the following functions to check the dataset:
+
+- `str()`, which shows me the structure of the data frame, including the data types for each variable.
+- `summary()`, which shows me the range of values for the different variables.
+- `View()`, which lets me see the data frame in R as though it were a spreadsheet.
+
+```{r}
+library(tidyverse)
+umass_tuition_data <- read_csv("data/umass_undergraduate_student_charges.csv")
+str(umass_tuition_data)
+summary(umass_tuition_data)
+#View(umass_tuition_data)
+```
+
+These data **look okay to me** (after cleaning).
+
+The variable names are what I expect them to be and the data types are as expected (`chr` for `Year` and `num` for everything else). The value ranges also seem okay to me and I'm not seeing any `NA` values (which I shouldn't have with this particular dataset).
+
+One thing I noted is that there are no data for 1982-1983 because UMass skipped a year between the two PDF files.
+
+### Question 4
+
+I can use the `max()` function to get the highest value within a vector. I only need to point that function at the right variable (`in_state_all_pctchg` within the `umass_tuition_data` variable). (I can also use `summary()` in the same way, and it will provide me with some extra information.)
+
+```{r}
+max(umass_tuition_data$in_state_all_pctchg)*100
+```
+
+The highest percent change was **22.6%**. (My data are storing the percentages as decimals, so I have to multiply it by 100.)
+
+### Question 5
+
+> This is an adaptation of a strong response submitted by one of your classmates. All responses that included a question that could be answered (at least in part) with these data **and** offered a clear explanation of how journalists and data could help one another were eligible for credit.
+
+**How has the difference in the amount paid by in-state and out-of-state students changed over the course of the past 70+ years?**
+
+It is common knowledge that out-of-state students pay a lot more than in-state students. I think there's an interesting story to be written that explores how the cost disparity has increased over time, and the policies and reasons for those changes. In this case, the data can help journalists pinpoint the particular years where the differences were greatest and illustrate the magnitude of the change. The journalists, in turn, can help explain the changes in the data by interviewing educational historians and members of the UMass administration in order to shed light on the decision-making processes and context around those times.
