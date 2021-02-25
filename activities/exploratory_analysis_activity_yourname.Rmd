@@ -1,0 +1,91 @@
+---
+title: "Activity: Exploratory Data and Visual Analysis"
+author: "YOUR NAME"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Load Data
+
+```{r}
+library(tidyverse)
+transfers <- read_csv("https://zamith.umasscreate.net/data/epl_transfers_2020.csv")
+```
+
+### Question 1
+
+> Create a dataset containing **only** *inbound* transfers from the *Arsenal FC* football club that includes *the following variables*: club name, player name, age, position, and the cleaned transfer fee.
+
+Write out the steps you need to complete to address this question here (like you saw in the tutorials). For example:
+
+1. Load data from my data frame.
+2. Use the `filter()` function to include observations from just one team and transfer direction.
+3. Use the `select()` function to include only a few of the variables.
+
+```{r}
+# Provide your code here.
+```
+
+### Question 2
+
+> Did Arsenal FC spend more money (inbound transfers) or generate more money (outbound transfers) in 2020? What was the difference in the amounts between the two directions?
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 3
+
+> Who was the most expensive player purchased (inbound) by an English Premier League team? Who was the most expensive player sold (outbound) by an English Premier League team? (It is okay to answer this question via two separate operations.)
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 4
+
+> Which Premier League team had the greatest number of outbound transfers?
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 5
+
+> Which team had the most inbound transfers in excess of 5 million pounds? How many transfers did that team have?
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 6
+
+> Use ggplot to create a column/bar graph that shows the total expenditures by the *five* clubs who spent the most money (inbound transfers).
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+# Provide your code here.
+```
+

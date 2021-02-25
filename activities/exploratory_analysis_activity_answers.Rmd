@@ -1,0 +1,117 @@
+---
+title: "Activity: Exploratory Data and Visual Analysis"
+author: "YOUR NAME"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Load Data
+
+```{r}
+library(tidyverse)
+transfers <- read_csv("https://zamith.umasscreate.net/data/epl_transfers_2020.csv")
+```
+
+### Question 1
+
+> Create a dataset containing **only** *inbound* transfers from the *Arsenal FC* football club that includes *the following variables*: club name, player name, age, position, and the cleaned transfer fee.
+
+Write out the steps you need to complete to address this question here (like you saw in the tutorials). For example:
+
+1. Load data from my data frame.
+2. Use the `filter()` function to include observations from just one team and transfer direction.
+3. Use the `select()` function to include only a few of the variables.
+
+```{r}
+transfers %>%
+  filter(club_name == "Arsenal FC" & transfer_movement == "in") %>%
+  select(club_name, player_name, age, position, fee_cleaned)
+```
+
+### Question 2
+
+> Did Arsenal FC spend more money (inbound transfers) or generate more money (outbound transfers) in 2020? What was the difference in the amounts between the two directions?
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+transfers %>%
+  filter(club_name == "Arsenal FC") %>%
+  group_by(transfer_movement) %>%
+  summarize(total_amount=sum(fee_cleaned, na.rm=TRUE))
+```
+
+Arsenal FC **spent more** money than they generated. That difference was **58.8** million pounds.
+
+### Question 3
+
+> Who was the most expensive player purchased (inbound) by an English Premier League team? Who was the most expensive player sold (outbound) by an English Premier League team? (It is okay to answer this question via two separate operations.)
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+transfers %>%
+  filter(transfer_movement=="in") %>%
+  arrange(-fee_cleaned) %>%
+  head(1)
+
+transfers %>%
+  filter(transfer_movement=="out") %>%
+  arrange(-fee_cleaned) %>%
+  head(1)
+```
+
+The most expensive player *purchased* was **Kai Havertz**. The most expensive player *sold* was **Ben Chilwell**.
+
+### Question 4
+
+> Which Premier League team had the greatest number of outbound transfers?
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+transfers %>%
+  filter(transfer_movement=="out") %>%
+  count(club_name) %>%
+  arrange(-n)
+```
+
+**Chelsea FC** had the greatest number of outbound transfers.
+
+### Question 5
+
+> Which team had the most inbound transfers in excess of 5 million pounds? How many transfers did that team have?
+
+```{r}
+transfers %>%
+  filter(transfer_movement=="in" & fee_cleaned >= 5) %>%
+  count(club_name) %>%
+  arrange(-n)
+```
+
+**Manchester City** had the greatest number of inbound transfers in excess of 5 million pounds.
+
+### Question 6
+
+> Use ggplot to create a column/bar graph that shows the total expenditures by the *five* clubs who spent the most money (inbound transfers).
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+transfers %>%
+  filter(transfer_movement=="in") %>%
+  group_by(club_name) %>%
+  summarize(total_expenditure=sum(fee_cleaned, na.rm=TRUE)) %>%
+  arrange(-total_expenditure) %>%
+  head(5) %>%
+  ggplot(aes(x=fct_reorder(club_name, -total_expenditure), y=total_expenditure)) +
+    geom_col()
+```
+
