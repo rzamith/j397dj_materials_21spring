@@ -1,0 +1,76 @@
+---
+title: "Activity: Intermediate Exploratory Data and Visual Analysis"
+author: "YOUR NAME"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Load Data
+
+```{r}
+library(tidyverse)
+vaccines <- read_csv("https://zamith.umasscreate.net/data/vaccines_by_state_20210302.csv")
+```
+
+### Question 1
+
+> How many people in the U.S. have received at least one dose of a COVID-19 vaccine in the U.S. (i.e., across all states and territories)?
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 2
+
+> What percent of the total vaccines delivered across the U.S. (all states and territories) have been administered?
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 3
+
+> Which state has the highest proportion of its population that has received both doses of the vaccination?
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+# Provide your code here.
+```
+
+Offer a clear **answer** here.
+
+### Question 4
+
+> Create a bar graph showing the vaccination rates for the 15 states with the highest vaccination rates. Please label your axes and try to make the chart as visually appealing as you can (at this stage).
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+# Provide your code here.
+```
+
+### Question 5
+
+> Create adjacent bar graphs (faceted) that show the vaccination rates for each U.S. Census division. (That is, each facet should include bars for all of the states within that region.) Please label your axes and try to make the chart as visually appealing as you can (at this stage).
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+# Provide your code here.
+```

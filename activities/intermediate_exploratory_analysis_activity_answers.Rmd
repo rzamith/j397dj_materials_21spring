@@ -1,0 +1,104 @@
+---
+title: "Activity: Intermediate Exploratory Data and Visual Analysis"
+author: "YOUR NAME"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Load Data
+
+```{r}
+library(tidyverse)
+#covid19_data_raw <- read_csv("/tmp/covid_19_vac.csv") %>% mutate(State=recode(State, "New York State"="New York")) # https://covid.cdc.gov/covid-data-tracker/#vaccinations as of March 2, 2021
+#population_data <- read_csv("https://zamith.umasscreate.net/data/census_population_estimate_2019.csv")
+#regions <- read_csv("https://raw.githubusercontent.com/cphalpert/census-regions/master/us%20census%20bureau%20regions%20and%20divisions.csv")
+#vaccines <- inner_join(covid19_data_raw, population_data %>% select(NAME, POPESTIMATE2019) %>% rename(`Population Estimate in 2019`=POPESTIMATE2019), by=c("State"="NAME")) %>% inner_join(regions, by=c("State")) %>% select(-`State Code`)
+#vaccines %>% write_csv("/tmp/vaccines_by_state_20210302.csv")
+vaccines <- read_csv("/tmp/vaccines_by_state_20210302.csv")
+```
+
+### Question 1
+
+> How many people in the U.S. have received at least one dose of a COVID-19 vaccine in the U.S. (i.e., across all states and territories)?
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+vaccines %>%
+  summarize(total_one_plus_dose=sum(`People with 1+ Doses by State of Residence`))
+```
+
+50,913,401 people have received at least one dose.
+
+### Question 2
+
+> What percent of the total vaccines delivered across the U.S. (all states and territories) have been administered?
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+vaccines %>%
+  summarize(total_delivered=sum(`Total Doses Delivered`), total_administered=sum(`Total Doses Administered by State where Administered`)) %>%
+  mutate(proportion=total_administered/total_delivered)
+```
+
+76.8% of the doses.
+
+### Question 3
+
+> Which state has the highest proportion of its population that has received both doses of the vaccination?
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+vaccines %>%
+  mutate(prop_two_doses=`People with 2 Doses by State of Residence`/`Population Estimate in 2019`) %>%
+  arrange(-prop_two_doses) %>%
+  select(State, `People with 2 Doses by State of Residence`, prop_two_doses)
+```
+
+Alaska.
+
+### Question 4
+
+> Create a bar graph showing the vaccination rates for the 15 states with the highest vaccination rates. Please label your axes and try to make the chart as visually appealing as you can (at this stage).
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+vaccines %>%
+  mutate(prop_two_doses=`People with 2 Doses by State of Residence`/`Population Estimate in 2019`) %>%
+  top_n(15, prop_two_doses) %>%
+  select(State, prop_two_doses) %>%
+  ggplot(aes(x=prop_two_doses, y=fct_reorder(State, prop_two_doses))) +
+    geom_col() +
+    theme_minimal() +
+    labs(x="Proportion of the State Population That Has Been Vaccinated", y="State", title="States With the Highest Vaccination Rates", caption="Source: Centers for Disease Control, U.S. Census Bureau") +
+    scale_x_continuous(limits=c(0, 0.20), breaks=seq(0, 0.25, 0.05))
+```
+### Question 5
+
+> Create adjacent bar graphs (faceted) that show the vaccination rates for each U.S. Census division. (That is, each facet should include bars for all of the states within that region.) Please label your axes and try to make the chart as visually appealing as you can (at this stage).
+
+Write out the steps you need to complete to address this question here.
+
+```{r}
+vaccines %>%
+  mutate(prop_two_doses=`People with 2 Doses by State of Residence`/`Population Estimate in 2019`) %>%
+  select(State, prop_two_doses, Division) %>%
+  ggplot(aes(x=prop_two_doses, y=fct_reorder(State, prop_two_doses), fill=prop_two_doses)) +
+    facet_wrap(~Division, scales="free_y") +
+    geom_col() +
+    #geom_vline(data=vaccines %>% mutate(prop_two_doses=`People with 2 Doses by State of Residence`/`Population Estimate in 2019`) %>% group_by(Division) %>% summarize(mean_prop_two_doses=mean(prop_two_doses)), aes(xintercept=mean_prop_two_doses, group=Division), colour='red') +
+    theme_minimal() +
+    labs(x="Proportion of the State Population That Has Been Vaccinated", y=element_blank(), title="Vaccination Rates by State and Region", caption="Source: Centers for Disease Control, U.S. Census Bureau") +
+    scale_x_continuous(limits=c(0, 0.20), breaks=seq(0, 0.25, 0.05)) +
+    theme(legend.position="bottom")
+```
