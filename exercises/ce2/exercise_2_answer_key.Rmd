@@ -60,7 +60,7 @@ Briefly explain what you are trying to do here.
 
 ```{r}
 cafi %>%
-  filter(Entity %in% c("The Ohio State University", "University of Massachusetts Amherst"), Year==2018) %>%
+  filter(Entity %in% c("The Ohio State University", "University of Massachusetts Amherst") & Year==2018) %>%
   select(Entity, Year, `Coaches Compensation`)
 
 40242782-6515645

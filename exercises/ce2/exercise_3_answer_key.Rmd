@@ -1,0 +1,123 @@
+---
+title: "Course Exercise #3"
+author: "Rodrigo Zamith"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Load the Data
+
+```{r}
+options(scipen=999)
+library(tidyverse)
+# ppp_ma_small <- read_csv("/tmp/All Data 0808/All Data 0808/Massachusetts 0808/PPP Data up to 150k 080820 MA.csv", col_types = cols(.default = "c"))
+# ppp_all <- read_csv("/tmp/All Data 0808/All Data 0808/150k plus 0808/PPP Data 150k plus 080820.csv", col_types = cols(.default = "c"))
+# ppp_ma <- ppp_all %>%
+#   filter(State=="MA") %>%
+#   bind_rows(ppp_ma_small)
+# 
+# library(lubridate)
+# ppp_ma %>%
+#   select(BusinessName, BusinessType, Address, City, State, Zip, NAICSCode, RaceEthnicity, Gender, Veteran, NonProfit, JobsReported, DateApproved, Lender, CD, LoanRange, LoanAmount) %>%
+#   mutate(RaceEthnicity=na_if(RaceEthnicity, "Unanswered"), Gender=na_if(Gender, "Unanswered"), Veteran=na_if(Veteran, "Unanswered"), NonProfit=recode(NonProfit, "Y"="Yes"), JobsReported=as.numeric(JobsReported), DateApproved=mdy(DateApproved), LoanRange=recode(LoanRange, "a $5-10 million"="$5-10 million", "b $2-5 million"="$2-5 million", "c $1-2 million"="$1-2 million", "d $350,000-1 million"="$350,000-1 million", "e $150,000-350,000"="$150,000-350,000"), LoanAmount=as.numeric(LoanAmount), City=str_to_title(City), Address=str_to_title(Address)) %>%
+#   write_csv("/tmp/ppp_loans_ma.csv")
+
+ppp_ma <- read_csv("https://zamith.umasscreate.net/data/ppp_loans_ma.csv", col_types=cols(LoanAmount="d"))
+naics_codes <- read_csv("https://zamith.umasscreate.net/data/naics_2017.csv")
+city_standardized <- read_csv("https://zamith.umasscreate.net/data/ppp_cities_standardized_names.csv")
+```
+
+### Combining Data
+
+Briefly explain what you are trying to do here.
+
+```{r}
+ppp_ma_joined <- ppp_ma %>% left_join(naics_codes, by=c("NAICSCode"="id")) %>% rename(NAICSName=name) %>% left_join(city_standardized, by="City")
+```
+
+### Data Analysis
+
+#### Question #1
+
+> Write your interview question here.
+
+```{r}
+# Write your code here
+```
+
+What is the **answer** to your question?
+
+#### Question 2
+
+> Write your interview question here.
+
+```{r}
+# Write your code here
+```
+
+What is the **answer** to your question?
+
+#### Question 3
+
+> Write your interview question here.
+
+```{r}
+# Write your code here
+```
+
+What is the **answer** to your question?
+
+#### Question 4
+
+> Write your interview question here.
+
+```{r}
+# Write your code here
+```
+
+What is the **answer** to your question?
+
+#### Question 5
+
+> Write your interview question here.
+
+```{r}
+# Write your code here
+```
+
+What is the **answer** to your question?
+
+### Short Article (400-500 words)
+
+(I suggest writing this in Word or some other software that supports spell- and grammar-checking, and then copy and pasting your story in.)
+
+### List of Interviewees
+
+#### Interviewee #1
+
+- Name, Title/Position, Organization
+- Contact information (e.g., phone number or e-mail)
+- URL to a page with details about them (e.g., biography page, personal website)
+- Specifics about what you think they could add to your brief (e.g., a specific finding you think they could help contextualize, and why you think they'd have the expertise/lived experience to do that)
+
+- First interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
+- Second interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
+- Third interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
+
+#### Interviewee #2
+
+- Name, Title/Position, Organization
+- Contact information (e.g., phone number or e-mail)
+- URL to a page with details about them (e.g., biography page, personal website)
+- Specifics about what you think they could add to your brief (e.g., a specific finding you think they could help contextualize, and why you think they'd have the expertise/lived experience to do that)
+
+- First interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
+- Second interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
+- Third interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
