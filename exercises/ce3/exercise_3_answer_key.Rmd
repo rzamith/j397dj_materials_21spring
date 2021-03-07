@@ -34,6 +34,15 @@ naics_codes <- read_csv("https://zamith.umasscreate.net/data/naics_2017.csv")
 city_standardized <- read_csv("https://zamith.umasscreate.net/data/ppp_cities_standardized_names.csv")
 ```
 
+And, let's confirm that the data were imported correctly:
+
+```{r}
+head(ppp_ma)
+head(naics_codes)
+head(city_standardized)
+```
+
+
 ### Combining Data
 
 Briefly explain what you are trying to do here.
@@ -105,7 +114,7 @@ What is the **answer** to your question?
 - Name, Title/Position, Organization
 - Contact information (e.g., phone number or e-mail)
 - URL to a page with details about them (e.g., biography page, personal website)
-- Specifics about what you think they could add to your brief (e.g., a specific finding you think they could help contextualize, and why you think they'd have the expertise/lived experience to do that)
+- Specifics about what you think they could add to your article (e.g., a specific finding you think they could help contextualize, and why you think they'd have the expertise/lived experience to do that)
 
 - First interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
 - Second interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
@@ -116,7 +125,7 @@ What is the **answer** to your question?
 - Name, Title/Position, Organization
 - Contact information (e.g., phone number or e-mail)
 - URL to a page with details about them (e.g., biography page, personal website)
-- Specifics about what you think they could add to your brief (e.g., a specific finding you think they could help contextualize, and why you think they'd have the expertise/lived experience to do that)
+- Specifics about what you think they could add to your article (e.g., a specific finding you think they could help contextualize, and why you think they'd have the expertise/lived experience to do that)
 
 - First interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
 - Second interview question you'd ask them. (Be sure to phrase these in an appropriate way.)

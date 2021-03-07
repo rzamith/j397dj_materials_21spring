@@ -13,7 +13,7 @@ rm(zoom_p1, zoom_p2, zoom_p3)
 
 ### Calculate Zoom Participation
 p_zoom <- zoom %>%
-  mutate(`User Email` = str_remove(`User Email`, coll("donahue."))) %>%
+  mutate(`User Email` = str_remove(`User Email`, coll("donahue.")), `Total Duration (Minutes)`=as.numeric(`Total Duration (Minutes)`)) %>%
   filter(`Total Duration (Minutes)` >= 60) %>%
   group_by(`User Email`) %>%
   count() %>%

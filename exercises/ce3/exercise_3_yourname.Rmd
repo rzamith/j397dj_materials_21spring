@@ -1,0 +1,120 @@
+---
+title: "Course Exercise #3"
+author: "Rodrigo Zamith"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Load the Data
+
+```{r}
+options(scipen=999)
+library(tidyverse)
+ppp_ma <- read_csv("https://zamith.umasscreate.net/data/ppp_loans_ma.csv", col_types=cols(LoanAmount="d"))
+naics_codes <- read_csv("https://zamith.umasscreate.net/data/naics_2017.csv")
+city_standardized <- read_csv("https://zamith.umasscreate.net/data/ppp_cities_standardized_names.csv")
+```
+
+Let's confirm that the data were imported correctly:
+
+```{r}
+head(ppp_ma)
+head(naics_codes)
+head(city_standardized)
+```
+
+
+### 1. Combining Data
+
+Briefly explain what you are trying to do here.
+
+```{r}
+ppp_ma_joined <- ppp_ma %>% left_join(naics_codes, by=c("NAICSCode"="id")) %>% rename(NAICSName=name) %>% left_join(city_standardized, by="City")
+```
+
+### 2. Data Analysis
+
+#### Question #1
+
+> Write your (data) interview question here.
+
+```{r}
+# Write your code here
+```
+
+What is the **answer** to your question?
+
+#### Question #2
+
+> Write your (data) interview question here.
+
+```{r}
+# Write your code here
+```
+
+What is the **answer** to your question?
+
+#### Question #3
+
+> Write your (data) interview question here.
+
+```{r}
+# Write your code here
+```
+
+What is the **answer** to your question?
+
+#### Question #4
+
+> Write your (data) interview question here.
+
+```{r}
+# Write your code here
+```
+
+What is the **answer** to your question?
+
+#### Question #5
+
+> Write your (data) interview question here.
+
+```{r}
+# Write your code here
+```
+
+What is the **answer** to your question?
+
+### 3. Short Article (400-500 words)
+
+(I suggest writing this in Word or some other software that supports spell- and grammar-checking, and then copy and pasting your story in.)
+
+### 4. The Interviewees
+
+#### Interviewee #1
+
+- Name, Title/Position, Organization
+- Contact information (e.g., phone number or e-mail)
+- URL to a page with details about them (e.g., biography page, personal website)
+- Specifics about what you think they could add to your article (e.g., a specific finding you think they could help contextualize, and why you think they'd have the expertise/lived experience to do that)
+
+- First interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
+- Second interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
+- Third interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
+
+#### Interviewee #2
+
+- Name, Title/Position, Organization
+- Contact information (e.g., phone number or e-mail)
+- URL to a page with details about them (e.g., biography page, personal website)
+- Specifics about what you think they could add to your article (e.g., a specific finding you think they could help contextualize, and why you think they'd have the expertise/lived experience to do that)
+
+- First interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
+- Second interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
+- Third interview question you'd ask them. (Be sure to phrase these in an appropriate way.)
