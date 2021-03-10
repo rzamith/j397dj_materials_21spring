@@ -1,6 +1,6 @@
 ---
 title: "Course Exercise #2"
-author: "YOUR NAME (with ANY PARTNERS)"
+author: "Rodrigo Zamith"
 output:
   html_document:
     toc: yes
@@ -34,7 +34,7 @@ str(cafi)
 summary(cafi)
 ```
 
-Overall, these data seem to be in pretty good shape. However, one thing that strikes me is that there is a decent amount of `NA` values for some of the variables (e.g., `Total Football Coaching Salaries`).
+Overall, these data seem to be in pretty good shape. However, one thing that strikes me is that there is a decent amount of `NA` values for some of the variables (e.g., `Total Football Coaching Salaries`). Additionally, there were two variables with the same name (`Competition Guarantess`) but different values, and it is not clear what data they cover.
 
 ### Question 2
 
@@ -43,6 +43,7 @@ Here's what I'd need to do:
 1. Load my data frame.
 2. Apply a filter to only include year 2018 and only evaluate schools.
 3. Sort the data based on the Coach's Compensation.
+4. Optional: I can select just a few of the columns and then peek at just the first row.
 
 ```{r}
 cafi %>%
@@ -56,21 +57,59 @@ cafi %>%
 
 ### Question 3
 
-Briefly explain what you are trying to do here.
+Here's what I'd need to do:
+
+1. Load the data.
+2. Filter in only data from my two universities of interest, and ensure those data only cover the year 2018.
+3. Calculate the difference in the Coaches' Compensation, and use that basis for calculating the relative change.
+
+First, let's get the Coaches' Compensation:
 
 ```{r}
 cafi %>%
   filter(Entity %in% c("The Ohio State University", "University of Massachusetts Amherst") & Year==2018) %>%
   select(Entity, Year, `Coaches Compensation`)
-
-40242782-6515645
-
-(40242782-6515645)/6515645*100
+40242782-6515645 # We could have also used a summarize() step after select(), but I want to show the original values here for demonstrative purposes.
 ```
 
-The Ohio State University's compensation for its athletic coaches was **$33,727,137** (or **517.6%**) higher than UMass'.
+The Ohio State University's compensation for its athletic coaches was **$33,727,137** higher than UMass'.
+
+Second, in order to get the relative basis, it's important to note that there are 2.5 ways of approaching this sub-question. The first is to calculate the [percentage change](https://www.calculatorsoup.com/calculators/algebra/percent-change-calculator.php) between the two values. The second is to calculate the [percentage difference](https://www.calculatorsoup.com/calculators/algebra/percent-difference-calculator.php) between the values.
+
+The first approach is most common as it is more intuitive to a general audience, but the second was an acceptable answer because the original question was poorly phrased. However, when calculating the percentage change, it is important to recognize that the calculation produces a different proportion depending on how you conduct the comparison (e.g., Ohio State relative to UMass or UMass relative to Ohio State).
+
+For example, if I want to compare Ohio State relative to UMass (_what the question asked for_), I would calculate:
+
+```{r}
+(40242782-6515645)/abs(6515645)*100
+```
+
+That means OSU's compensation is **517.6% higher** than UMass'.
+
+If I wanted to compare UMass' compensation relative to OSU's, I would calculate:
+
+```{r}
+(6515645-40242782)/abs(40242782)*100
+```
+
+That means UMass' compensation is **83.8% lower** than OSU's.
+
+If I wanted to calculate the percentage difference between the two values, I would calculate:
+
+```{r}
+abs(6515645-40242782)/((6515645+40242782)/2)*100
+```
+
+What this tells us is that there is a **144.3% difference** between the two schools when it comes to the compensation of athletic coaches. (This is far less intuitive for audiences that are more accustomed to percent change.)
 
 ### Question 4
+
+Here's what I'd need to do:
+
+1. Load my data frame.
+2. Filter my data so I only get observations from my two conferences of interest, and only for the year 2018.
+3. Group the data by conference so I can perform a separate operation on each of my two conferences.
+4. Calculate a summary statistic (again, per conference) that reflects the total amount of football spending across schools.
 
 ```{r}
 cafi %>%
@@ -82,6 +121,14 @@ cafi %>%
 The Southeastern Conference had **higher** total football expenditures than the Big Ten Conference.
 
 ### Question 5
+
+Here's what I'd need to do:
+
+1. Load my data frame.
+2. Filter my data so I am only looking at the Power Five conferences, and only for the year 2018.
+3. Group the data by conference so I can perform a separate operation on each of my two conferences.
+4. Calculate a summary statistic (again, per conference) that reflects the median amount of football spending across schools.
+5. Sort my resulting data so I can quickly identify the conference with the highest median.
 
 ```{r}
 cafi %>%
@@ -95,13 +142,23 @@ The **Southeastern Conference** had the highest median total football spending a
 
 ### Question 6
 
+I realized after the fact that I had not fully covered how to create boxplots with `ggplot2` in the tutorial. (I only covered how to create them with `DataExplorer`.) Thus, I was pretty generous in the assignment of points for this question provided you demonstrated the ability to either (a) generate some useful boxplots or (b) answer the question using a different kind of geometry.
+
+Here's what I'd need to do to answer the question as asked:
+
+1. Load my data frame.
+2. Apply a filter so that I am only including data between the desired time range and from the Power Five conferences.
+3. Use ggplot to create a base layer that places total football spending on the X axis and the FBS conference on the Y axis. (This is to improve readability. You could just as well alternate the axes.)
+4. Create a boxplot geometric shape as a subsequent layer.
+5. Facet my ggplot to produce a series of plots based on the year.
+6. Optional: I can label and tweak my X axis label to remove overlapping values.
+
 ```{r}
 cafi %>%
   filter(between(Year, 2013, 2018) & `FBS Conference` %in% c("Atlantic Coast Conference", "Big Ten Conference", "Big 12 Conference", "Pacific-12 Conference", "Southeastern Conference")) %>%
   select(Year, `FBS Conference`, `Total Football Spending`) %>%
-  ggplot(aes(x=fct_reorder(`FBS Conference`, desc(`FBS Conference`)), y=`Total Football Spending`)) +
+  ggplot(aes(x=`Total Football Spending`, y=`FBS Conference`)) +
     geom_boxplot() +
-    coord_flip() +
     facet_wrap(~Year) +
     theme(axis.text.x=element_text(angle=45, hjust=1)) +
     xlab("FBS Conference")
@@ -110,18 +167,28 @@ I can see that the median total football spending by the Southeastern Conference
 
 ### Question 7
 
+Here's what I'd need to do:
+
+1. Load my data frame.
+2. Filter the data so I am only looking at UMass Amherst.
+3. To be on the safe side, arrange the data in ascending order by year (to correctly produce the next step)
+4. Calculate the percent change by using the calculation, using the current year as Y2 (new value) and the previous year as Y1 (old value).
+5. Optional: I can apply a filter to only review the years of interest, and select just the relevant variables.
+
 ```{r}
 cafi %>%
   filter(Entity=="University of Massachusetts Amherst") %>%
   arrange(Year) %>%
   select(Entity, Year, `Total Expenses`) %>%
-  mutate(pct_change=(`Total Expenses`-lag(`Total Expenses`, 1))/lag(`Total Expenses`, 1)*100) %>%
+  mutate(pct_change=(`Total Expenses`-lag(`Total Expenses`, 1))/abs(lag(`Total Expenses`, 1))*100) %>%
   filter(between(Year, 2013, 2018))
 ```
 
 The increases between 2013 and 2018 were: **2.8%, 7.2%, 10.1%, 14.5%, 11.1%, and -2.3%**.
 
-### Question 8 (Part 1)
+### Question 8
+
+These answers varied depending on the student's interest. Here is a sample question:
 
 My question: Has UMass' academic spending increased at a proportional rate to its athletic spending over the past five years?
 
@@ -133,10 +200,8 @@ cafi %>%
   arrange(Year) %>%
   select(Entity, Year, `Total Expenses`, `Total Academic Spending (University-Wide)`) %>%
   mutate(pct_chg_athletic=(`Total Expenses`-lag(`Total Expenses`, 1))/lag(`Total Expenses`, 1)*100, pct_chg_acad=(`Total Academic Spending (University-Wide)`-lag(`Total Academic Spending (University-Wide)`, 1))/lag(`Total Academic Spending (University-Wide)`, 1)*100) %>%
-  mutate(pct_diff=pct_chg_athletic-pct_chg_acad) %>%
+  mutate(athletic_diff_pctpoints=pct_chg_athletic-pct_chg_acad) %>%
   filter(between(Year, 2014, 2018))
 ```
 
-With the exception of the most recent year (2018), UMass has seen larger year-over-year percent increases in its total athletic spending.
-
-### Question 8 (Part 2)
+With the exception of the most recent year (2018), UMass has seen larger year-over-year percent increases in its total athletic spending. It would be interesting to examine if the trend goes back further, and to do some reporting to figure out what happened to buck the trend in 2018.

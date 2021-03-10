@@ -40,7 +40,7 @@ Please answer the following questions through an R Notebook (please use [this te
 
 &nbsp;
 
-3. How much higher was the the highest school's compensation for its athletic coaches in 2018, relative to UMass'? (Express this both as a dollar figure and percent difference.) (*3 points*)
+3. How much higher was the the highest school's compensation for its athletic coaches in 2018, relative to UMass'? (Express this both as a dollar figure and percent change.) (*3 points*)
 
 &nbsp;
 
