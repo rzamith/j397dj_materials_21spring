@@ -1,0 +1,56 @@
+---
+title: "Activity: Combining Datasets"
+author: "YOUR NAME"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Load Data
+
+```{r}
+library(tidyverse)
+vaccines <- read_csv("https://zamith.umasscreate.net/data/vaccinations_by_country_20210311.csv")
+population <- read_csv("https://zamith.umasscreate.net/data/population_by_country_20210311.csv")
+# These data are modified extracts of files obtained from/aggregated by SociePy (see: https://github.com/sociepy/covid19-vaccination-subnational)
+```
+
+### Let's take a look at our data
+
+```{r}
+vaccines
+```
+
+```{r}
+population
+```
+
+### Join the Data
+
+> I want to add the associated information from the `population` variable (from the `population` data frame) to each observation in my `vaccines` data frame. How would I do that?
+
+```{r}
+# Code here
+```
+
+### Compute a Variable
+
+> Calculate a per 1,000 people rate for the number of people vaccinated in each **country**.
+
+```{r}
+# Code here
+```
+
+### Create a bar chart
+
+> Create a bar graph with the 10 countries that have the highest vaccination rates
+
+```{r}
+# Code here
+```

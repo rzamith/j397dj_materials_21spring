@@ -1,0 +1,86 @@
+---
+title: "Activity: Combining Datasets (Answer Key)"
+author: "Rodrigo Zamith"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    df_print: paged
+    theme: spacelab
+    highlight: pygment
+---
+
+### Load Data
+
+```{r}
+library(tidyverse)
+vaccines_orig <- read_csv("https://raw.githubusercontent.com/sociepy/covid19-vaccination-subnational/main/data/vaccinations.csv")
+population_orig <- read_csv("https://raw.githubusercontent.com/sociepy/covid19-vaccination-subnational/main/data/population.csv")
+
+vaccines_orig %>%
+  select(-total_vaccinations_per_100, -people_vaccinated_per_100, -people_fully_vaccinated_per_100) %>%
+  write_csv("/tmp/vaccinations_by_country_20210311.csv")
+
+population_orig %>%
+  group_by(region_iso) %>%
+  summarize(population=as.integer(median(population))) %>%
+  write_csv("/tmp/population_by_country_20210311.csv")
+```
+
+
+```{r}
+library(tidyverse)
+vaccines <- read_csv("/tmp/vaccinations_by_country_20210311.csv")
+population <- read_csv("/tmp/population_by_country_20210311.csv")
+
+vaccines <- read_csv("https://zamith.umasscreate.net/data/vaccinations_by_country_20210311.csv")
+population <- read_csv("https://zamith.umasscreate.net/data/population_by_country_20210311.csv")
+```
+
+### Let's take a look at our data
+
+```{r}
+vaccines
+```
+
+```{r}
+population
+```
+
+### Join the Data
+
+> I want to add the associated information from the `population` variable (from the `population` data frame) to each observation in my `vaccines` data frame. How would I do that?
+
+```{r}
+vaccines_with_pop <- left_join(vaccines, population, by="region_iso")
+```
+
+### Compute a Variable
+
+> Calculate a per 1,000 people rate for the number of people vaccinated in each **country**.
+
+```{r}
+vaccines_with_pop %>%
+  group_by(location) %>%
+  summarize(total_people_vac=sum(people_vaccinated, na.rm=TRUE), population=sum(population)) %>%
+  filter(total_people_vac>0) %>%
+  mutate(people_vac_per_1k=total_people_vac/population*1000)
+```
+
+### Create a bar chart
+
+> Create a bar graph with the 10 countries that have the highest vaccination rates
+
+```{r}
+vaccines_with_pop %>%
+  group_by(location) %>%
+  summarize(total_people_vac=sum(people_vaccinated, na.rm=TRUE), population=sum(population)) %>%
+  filter(total_people_vac>0) %>%
+  mutate(people_vac_per_1k=total_people_vac/population*1000) %>%
+  top_n(10, people_vac_per_1k) %>%
+  ggplot(aes(x=fct_reorder(location, people_vac_per_1k), y=people_vac_per_1k)) +
+    geom_col() +
+    coord_flip()
+```
